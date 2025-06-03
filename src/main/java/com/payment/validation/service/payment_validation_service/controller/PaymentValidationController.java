@@ -26,7 +26,7 @@ public class PaymentValidationController {
         if ("SUCCESS".equalsIgnoreCase(response.getStatus())) {
             return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.badRequest().body(response);
+            return ResponseEntity.ok(response); // sigue siendo 200 OK, pero con status = "error" dentro del cuerpo
         }
     }
 }
