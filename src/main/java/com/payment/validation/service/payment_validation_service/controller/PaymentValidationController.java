@@ -21,12 +21,12 @@ public class PaymentValidationController {
 
     @PostMapping
     public ResponseEntity<PaymentValidationResponse> validatePayment(@RequestBody PaymentValidationRequest request) {
-        boolean isValid = validationService.validate(request);
+        PaymentValidationResponse response = validationService.validate(request);
 
-        if (isValid) {
-            return ResponseEntity.ok(new PaymentValidationResponse("SUCCESS", "Payment is valid"));
+        if ("SUCCESS".equalsIgnoreCase(response.getStatus())) {
+            return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.badRequest().body(new PaymentValidationResponse("REJECTED", "Invalid payment"));
+            return ResponseEntity.badRequest().body(response);
         }
     }
 }
